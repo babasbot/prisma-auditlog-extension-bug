@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+    postgres:
+        image: "postgres:13.2"
+        container_name: prisma_postgres
+        environment:
+            - POSTGRES_PASSWORD=secretpassword
+            - POSTGRES_DB=prisma_extensions
+        volumes:
+            - prisma_extensions_db_data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+
+volumes:
+    prisma_extensions_db_data:

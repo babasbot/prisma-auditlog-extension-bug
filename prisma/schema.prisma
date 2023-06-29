@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AuditLog {
+  id        Int      @id @default(autoincrement())
+  model     String
+  operation String
+  args      Json
+  createdAt DateTime @default(now())
+}
+
+model Report {
+  id        Int          @id @default(autoincrement())
+  status    ReportStatus @default(open)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @default(now()) @updatedAt
+}
+
+enum ReportStatus {
+  open
+  closed
+}
