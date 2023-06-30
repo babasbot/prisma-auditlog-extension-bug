@@ -5,7 +5,7 @@ const auditLog = Prisma.defineExtension((prisma) =>
     name: "auditLog",
     query: {
       $allModels: {
-        async $allOperations({ model, operation, args, query }) {
+        $allOperations: async ({ model, operation, args, query }) => {
           const result = await query(args);
 
           await prisma.auditLog.create({
